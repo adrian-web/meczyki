@@ -22,4 +22,16 @@ class ArticlesTest extends TestCase
 
         $response->assertSee($article->title);
     }
+
+    /** @test */
+    public function a_person_can_view_a_single_article()
+    {
+        $this->withoutExceptionHandling();
+
+        $article = Article::factory()->create();
+
+        $response = $this->get('/articles/' . $article->id);
+
+        $response->assertSee($article->title);
+    }
 }
