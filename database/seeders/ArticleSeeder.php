@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ArticleSeeder extends Seeder
@@ -14,8 +15,14 @@ class ArticleSeeder extends Seeder
      */
     public function run()
     {
-        Article::factory()
-                    ->times(30)
-                    ->create();
+        $users = User::factory()
+                ->count(10)
+                ->create();
+
+        foreach ($users as $user) {
+            Article::factory()
+                        ->times(rand(1, 9))
+                        ->create(['author_id' => $user->id]);
+        }
     }
 }

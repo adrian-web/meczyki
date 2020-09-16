@@ -19,3 +19,5 @@
     @endif
 </article>
 @endforeach
+
+{{ $articles->links() }}

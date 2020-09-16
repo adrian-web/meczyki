@@ -16,9 +16,11 @@ class ArticleController extends Controller
     public function index(User $user)
     {
         if ($user->exists) {
-            $articles = $user->articles()->latest()->get();
+            // $articles = $user->articles()->latest()->get();
+            $articles = $user->articles()->latest()->paginate(10);
         } else {
-            $articles = Article::latest()->get();
+            // $articles = Article::latest()->get();
+            $articles = Article::latest()->paginate(10);
         }
 
         return view('articles.index', compact('articles'));
