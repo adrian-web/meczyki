@@ -2,26 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
-class ArticleController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function index()
     {
-        if ($user->exists) {
-            $articles = $user->articles()->latest();
-        } else {
-            $articles = Article::latest();
+        $top = 3;
+
+        $users = User::get();
+        $usersArticles = [];
+
+        foreach ($users as $user) {
+            $usersArticles = Arr::add($usersArticles, $user->id, count($user->articles));
         }
 
-        return view('articles.index', ['articles' => $articles->paginate(7)]);
+        $usersTop = [];
+
+        for ($i=0; $i < $top; $i++) {
+            $value = max($usersArticles);
+            $key = array_search($value, $usersArticles);
+            $usersTop = Arr::add($usersTop, $i, $users[$key - 1]);
+            Arr::pull($usersArticles, $key);
+        }
+
+        return view('users', ['users' => $usersTop]);
     }
 
     /**
@@ -48,21 +60,21 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(User $user)
     {
-        return view('articles.show', compact('article'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit(User $user)
     {
         //
     }
@@ -71,10 +83,10 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -82,10 +94,10 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Article  $article
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy(User $user)
     {
         //
     }

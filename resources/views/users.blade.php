@@ -7,26 +7,19 @@
                     <a href="/users">Top 3 Users</a>
                 </h2>
                 <hr>
+                @foreach ($users as $user)
+                <div>
+                    <h4>
+                        <a href="{{ '/articles/user/' . $user->id }}">{{ $user->name }}</a>
+                        {{ ' wrote ' . count($user->articles) . ' articles'}}
+                    </h4>
 
-                @foreach ($articles as $article)
-                <article>
-                    <h4>
-                        <a href="{{ '/articles/user/' . $article->author->id }}">{{ $article->author->name }}</a>
-                        {{ ' wrote ' . $article->created_at->diffForHumans() }}
-                    </h4>
-                    <h4>
-                        <a href="{{ '/articles/' . $article->id }}">{{ $article->title }}</a>
-                    </h4>
-                    <div>{{ $article->body }}</div>
                     @if ( $loop->last )
-                    <div class="mt-3"></div>
                     @else
                     <hr>
                     @endif
-                </article>
+                </div>
                 @endforeach
-
-                {{ $articles->links() }}
 
             </div>
         </div>

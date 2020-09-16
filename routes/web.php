@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('/articles', [ArticleController::class, 'index']);
 
+Route::get('/articles/user/{user}', [ArticleController::class, 'index']);
+
 Route::get('/articles/{article}', [ArticleController::class, 'show']);
 
-Route::get('/articles/user/{user}', [ArticleController::class, 'index']);
+Route::get('/users', [UserController::class, 'index']);
