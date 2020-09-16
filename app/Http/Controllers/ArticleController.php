@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -12,9 +13,13 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        $articles = Article::latest()->get();
+        if ($user->exists) {
+            $articles = $user->articles()->latest()->get();
+        } else {
+            $articles = Article::latest()->get();
+        }
 
         return view('articles.index', compact('articles'));
     }
