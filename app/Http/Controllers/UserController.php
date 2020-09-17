@@ -19,7 +19,6 @@ class UserController extends Controller
 
         $users = User::get();
         $usersArticles = [];
-
         
         foreach ($users as $user) {
             $usersArticles = Arr::add($usersArticles, $user->id, count($user->allArticles()->get()));

@@ -39,5 +39,4 @@ Route::patch('/articles/{article}', [ArticleController::class, 'update']);
 
 Route::delete('/articles/{article}', [ArticleController::class, 'destroy']);
 
-
 Route::get('/users', [UserController::class, 'index']);

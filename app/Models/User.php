@@ -63,7 +63,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Article::class, 'author_id');
     }
-
     
     public function allArticles()
     {

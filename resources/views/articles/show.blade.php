@@ -20,7 +20,6 @@
                         <x-jet-button>
                             {{ __('Delete') }}
                         </x-jet-button>
-
                     </form>
 
                     <div class="font-semibold text-xl text-gray-800 leading-tight mt-3">
@@ -34,7 +33,6 @@
                         <h4 class="mt-8 text-2xl">{{ $article->title }}</h4>
                         <div class="mt-6 text-gray-500">{{ $article->body }}</div>
                     </article>
-
 
                 </div>
             </div>
