@@ -21,7 +21,8 @@ class ArticleController extends Controller
     public function index(User $user)
     {
         if ($user->exists) {
-            $articles = $user->articles()->latest();
+            // $articles = $user->articles()->latest();
+            $articles = $user->allArticles()->latest();
         } else {
             $articles = Article::latest();
         }

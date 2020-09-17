@@ -63,4 +63,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Article::class, 'author_id');
     }
+
+    
+    public function allArticles()
+    {
+        return Article::where('author_id', $this->id)
+                ->orWhereHas('coauthors', function ($query) {
+                    $query->where('user_id', $this->id);
+                });
+        // ->get();
+    }
 }

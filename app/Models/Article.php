@@ -18,6 +18,6 @@ class Article extends Model
 
     public function coauthors()
     {
-        return $this->belongsToMany(User::class, 'articles_coauthors');
+        return $this->belongsToMany(User::class, 'articles_coauthors')->withTimestamps();
     }
 }

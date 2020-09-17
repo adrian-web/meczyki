@@ -12,7 +12,7 @@
                 <div>
                     <h4>
                         <a href="{{ '/articles/user/' . $user->id }}">{{ $user->name }}</a>
-                        {{ ' wrote ' . count($user->articles) . ' articles'}}
+                        {{ ' wrote ' . count($user->allArticles()->get()) . ' articles'}}
                     </h4>
 
                     @if ( $loop->last )
