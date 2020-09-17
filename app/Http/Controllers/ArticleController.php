@@ -82,7 +82,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('articles.edit', compact('article'));
     }
 
     /**
@@ -94,7 +94,19 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $article->update(
+            [
+                'title' => request('title'),
+                'body' => request('body'),
+            ]
+        );
+
+        return redirect('/articles/' . $article->id);
     }
 
     /**

@@ -4,10 +4,14 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <h2>
                     <a href="/articles">Articles</a>
-                    <a href="/users">Top 3 Users</a>
+                    <a href="/users">Top 3</a>
+                    <a href="/articles/create">Create</a>
                 </h2>
                 <hr>
-
+                <h3>
+                    <a href="{{ '/articles/' . $article->id . '/edit' }}">Edit</a>
+                </h3>
+                <hr>
                 <article>
                     <h4>{{ $article->title }}</h4>
                     <div>{{ $article->body }}</div>

@@ -25,12 +25,17 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('/articles', [ArticleController::class, 'index']);
 
+Route::get('/articles/user/{user}', [ArticleController::class, 'index']);
+
 Route::get('/articles/create', [ArticleController::class, 'create']);
 
 Route::post('/articles', [ArticleController::class, 'store']);
 
-Route::get('/articles/user/{user}', [ArticleController::class, 'index']);
-
 Route::get('/articles/{article}', [ArticleController::class, 'show']);
+
+Route::get('/articles/{article}/edit', [ArticleController::class, 'edit']);
+
+Route::patch('/articles/{article}', [ArticleController::class, 'update']);
+
 
 Route::get('/users', [UserController::class, 'index']);
