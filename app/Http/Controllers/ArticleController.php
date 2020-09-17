@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +36,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -42,7 +47,20 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $article = Article::create(
+            [
+                'author_id' => auth()->id(),
+                'title' => request('title'),
+                'body' => request('body'),
+            ]
+        );
+
+        return redirect('/articles/' . $article->id);
     }
 
     /**
