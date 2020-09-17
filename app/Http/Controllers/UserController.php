@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -16,22 +18,37 @@ class UserController extends Controller
     public function index()
     {
         $top = 3;
+        $last = 7;
 
         $users = User::get();
-        $usersArticles = [];
-        
-        foreach ($users as $user) {
-            $usersArticles = Arr::add($usersArticles, $user->id, count($user->allArticles()->get()));
-            // $usersArticles = Arr::add($usersArticles, $user->id, count($user->articles));
+
+        $articlesLastWeek = Article::whereBetween('created_at', [Carbon::now()->subDays($last), Carbon::now()])
+                             ->get();
+
+        $articlesSharedLastWeek = \DB::table('articles_coauthors')
+                            ->whereBetween('created_at', [Carbon::now()->subDays($last), Carbon::now()])
+                            ->get();
+                        
+        $articlesLastWeekCount = array_count_values(array_column($articlesLastWeek->toArray(), 'author_id'));
+        $articlesSharedLastWeekCount = array_count_values(array_column($articlesSharedLastWeek->toArray(), 'user_id'));
+
+        $articlesAllLastWeekCount = [];
+
+        foreach ($articlesSharedLastWeekCount as $key => $value) {
+            if (Arr::exists($articlesLastWeekCount, $key)) {
+                $articlesAllLastWeekCount[$key] = $value + $articlesLastWeekCount[$key];
+            } else {
+                $articlesAllLastWeekCount[$key] = $value;
+            }
         }
 
         $usersTop = [];
 
         for ($i=0; $i < $top; $i++) {
-            $value = max($usersArticles);
-            $key = array_search($value, $usersArticles);
+            $value = max($articlesAllLastWeekCount);
+            $key = array_search($value, $articlesAllLastWeekCount);
             $usersTop = Arr::add($usersTop, $i, $users[$key - 1]);
-            Arr::pull($usersArticles, $key);
+            Arr::pull($articlesAllLastWeekCount, $key);
         }
 
         return view('users', ['users' => $usersTop]);

@@ -15,8 +15,8 @@ class CreateArticlesCoauthorsTable extends Migration
     {
         Schema::create('articles_coauthors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('article_id');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('article_id')->constrained('articles')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
 
             $table->index(['article_id', 'user_id']);
