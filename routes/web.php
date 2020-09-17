@@ -23,7 +23,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
 
 Route::get('/articles/user/{user}', [ArticleController::class, 'index']);
 
