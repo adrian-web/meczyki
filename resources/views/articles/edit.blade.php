@@ -26,8 +26,6 @@
 
                     <button type="submit" class="button">Update</button>
                 </form>
-                @else
-                <a href="{{ route('login') }}">Please sign in...</a>
 
                 @endif
             </div>

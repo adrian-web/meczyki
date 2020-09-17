@@ -10,6 +10,17 @@
                 <hr>
                 <h3>
                     <a href="{{ '/articles/' . $article->id . '/edit' }}">Edit</a>
+
+                    @if (auth()->check())
+
+                    <form action="{{ '/articles/' . $article->id }}" method="POST">
+                        @method('DELETE')
+                        @csrf
+
+                        <button type="submit" class="button">Delete</button>
+                    </form>
+
+                    @endif
                 </h3>
                 <hr>
                 <article>
