@@ -14,6 +14,15 @@
                     <h4>
                         <a href="{{ '/articles/user/' . $article->author->id }}">{{ $article->author->name }}</a>
                         {{ ' wrote ' . $article->created_at->diffForHumans() }}
+                        {{ ', coauthors: ' }}
+                        @foreach ($article->coauthors->pluck('name')->all() as $coauthor)
+                        @if ( $loop->first )
+                        {{ $coauthor }}
+                        @else
+                        {{ ', ' . $coauthor }}
+                        @endif
+                        @endforeach
+
                     </h4>
                     <h4>
                         <a href="{{ '/articles/' . $article->id }}">{{ $article->title }}</a>

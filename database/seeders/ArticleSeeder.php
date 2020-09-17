@@ -24,5 +24,15 @@ class ArticleSeeder extends Seeder
                         ->times(rand(1, 9))
                         ->create(['author_id' => $user->id]);
         }
+
+        $articles = Article::get();
+
+        foreach ($articles as $article) {
+            $filtered = $users->except($article->author_id);
+
+            for ($i=0; $i < rand(1, 3); $i++) {
+                $article->coauthors()->attach($filtered->random());
+            }
+        }
     }
 }

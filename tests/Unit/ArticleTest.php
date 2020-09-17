@@ -21,4 +21,19 @@ class ArticleTest extends TestCase
 
         $this->assertInstanceOf(User::class, $article->author);
     }
+
+    /** @test */
+    public function an_article_may_have_a_coauthor()
+    {
+        $this->withoutExceptionHandling();
+        
+        $article = Article::factory()->create();
+
+        $user = User::factory()->create();
+
+        $article->coauthors()->attach($user);
+
+        $this->assertCount(1, $article->coauthors);
+        $this->assertInstanceOf(User::class, $article->coauthors()->first());
+    }
 }

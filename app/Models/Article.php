@@ -15,4 +15,9 @@ class Article extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function coauthors()
+    {
+        return $this->belongsToMany(User::class, 'articles_coauthors');
+    }
 }
