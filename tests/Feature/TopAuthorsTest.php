@@ -57,6 +57,13 @@ class TopAuthorsTest extends TestCase
             }
         }
 
+        foreach ($articlesLastWeekCount as $key => $value) {
+            if (Arr::exists($articlesAllLastWeekCount, $key)) {
+            } else {
+                $articlesAllLastWeekCount[$key] = $value;
+            }
+        }
+
         // dd($articlesAllLastWeekCount);
 
         $usersTop = [];

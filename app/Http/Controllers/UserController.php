@@ -42,6 +42,13 @@ class UserController extends Controller
             }
         }
 
+        foreach ($articlesLastWeekCount as $key => $value) {
+            if (Arr::exists($articlesAllLastWeekCount, $key)) {
+            } else {
+                $articlesAllLastWeekCount[$key] = $value;
+            }
+        }
+
         $usersTop = [];
 
         for ($i=0; $i < $top; $i++) {
