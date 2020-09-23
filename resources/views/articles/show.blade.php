@@ -13,17 +13,20 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
 
-                    <form action="{{ '/articles/' . $article->id }}" method="POST">
-                        @method('DELETE')
-                        @csrf
+                    <div class="flex items-center">
+                        <div class="flex-1 font-semibold text-xl text-gray-800 leading-tight">
+                            <a href="{{ '/articles/' . $article->id . '/edit' }}">Edit</a>
+                        </div>
+                        <div class="">
+                            <form action="{{ '/articles/' . $article->id }}" method="POST">
+                                @method('DELETE')
+                                @csrf
 
-                        <x-jet-button>
-                            {{ __('Delete') }}
-                        </x-jet-button>
-                    </form>
-
-                    <div class="font-semibold text-xl text-gray-800 leading-tight mt-3">
-                        <a href="{{ '/articles/' . $article->id . '/edit' }}">Edit</a>
+                                <x-jet-button>
+                                    {{ __('Delete') }}
+                                </x-jet-button>
+                            </form>
+                        </div>
                     </div>
 
                     <div class="mt-3"></div>
