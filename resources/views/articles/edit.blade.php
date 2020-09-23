@@ -30,7 +30,7 @@
                                         <x-jet-label for="body" value="{{ __('Body') }}" />
                                         <textarea name="body" id="body" rows="10"
                                             class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                            required>{{ $article->body }}></textarea>
+                                            required>{{ $article->body }}</textarea>
                                         <x-jet-input-error for="body" class="mt-2" />
 
                                     </div>
