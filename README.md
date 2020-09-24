@@ -9,14 +9,14 @@
 
 ## About a project
 
-Simple news article system, complete with MySQL database, PHP API and HTML form to add and edit entities.
+Simple news website with Laravel and TDD.
 
 Data structure
 1. News entity with at least title, text and creation date fields.
 2. News author entity with at least name field.
 3. Articles can have multiple authors.
 
-API Endpoints
+Route endpoints
 1. Get article by some id.
 2. Get all articles for given author.
 3. Get top 3 authors that wrote the most articles last week.
@@ -29,7 +29,7 @@ A guest can freely view and explore articles but to edit/create/delete articles 
 
 To login/register, look up to top right corner of a website (visible only to guests) or manually visit '/login' or '/register'. While logged in, profile dropdown menu appears. 
 
-From a main route '/articles' you can visit specific routes through hyperlinks:
+From a main route '/articles' you can visit specific routes:
 - explore all articles,
 - visit a specific article,
 - visit users' articles,
