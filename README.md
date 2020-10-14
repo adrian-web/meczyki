@@ -11,31 +11,6 @@
 
 Simple news website with Laravel and TDD.
 
-Data structure
-1. News entity with at least title, text and creation date fields.
-2. News author entity with at least name field.
-3. Articles can have multiple authors.
-
-Route endpoints
-1. Get article by some id.
-2. Get all articles for given author.
-3. Get top 3 authors that wrote the most articles last week.
-
-## How to navigate a project
-
-To visit articles page, manually add '/articles' route or click 'News' hyperlink (visible on default '/' page or on '/dashboard' page upon login in to a site).
-
-A guest can freely view and explore articles but to edit/create/delete articles you have to be logged in (registration required).
-
-To login/register, look up to top right corner of a website (visible only to guests) or manually visit '/login' or '/register'. While logged in, profile dropdown menu appears. 
-
-From a main route '/articles' you can visit specific routes:
-- explore all articles,
-- visit a specific article,
-- visit users' articles,
-- submit edits to an article or create a new article,
-- see a list of Top 3 posting authors from last week.
-
 ## How to setup a Laravel project from github repository
 
 1. Download .zip file from a given github repository.
